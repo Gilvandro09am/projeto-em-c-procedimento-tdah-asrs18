@@ -15,7 +15,6 @@ código:
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 struct dados {
   char nome[100];
   char telefone[20];
@@ -23,8 +22,6 @@ struct dados {
   struct dados *prox;
 };
 // criando struct - dados do usuario 
-
-
 struct dados *criardados(char *nome, char *telefone, char *email) {
   struct dados *novodados = (struct dados *)malloc(sizeof(struct dados));
   strcpy(novodados->nome, nome);
@@ -35,14 +32,12 @@ struct dados *criardados(char *nome, char *telefone, char *email) {
   return novodados;
 }
 // Struct dados apontando para função criar dados, criando os dados do usuario
-
 void criarArquivo(struct dados* dados) {
   FILE* arquivo = fopen("dados.txt", "a"); 
   if (arquivo == NULL) {
     printf("Erro ao criar o arquivo.\n");
     return;
   }
-
     if (dados == NULL) {
       printf("NÃO EXISTEM DADOS.\n");
     } else {
@@ -59,7 +54,6 @@ void criarArquivo(struct dados* dados) {
     }
     fclose(arquivo); // Fecha o arquivo
 }
-
 void exibirdados(struct dados *dados) {
   if (dados == NULL) {
     printf("NÃO EXISTE SEUS DADOS.\n");
@@ -75,7 +69,6 @@ void exibirdados(struct dados *dados) {
   }
 }
 // função para exibir os dados do usúario armazenados na lista encadeada
-
 void alerta() {
   printf("----------------------------------------------------------\n");
   printf("⚠ ATENÇÃO: O diagnóstico do Transtorno de Déficit de Atenção e Hiperatividade (TDAH) em crianças, adolescentes e adultos envolve várias etapas. Não existe nenhum teste para TDAH definitivo ou on-line. Estes questionários também não tem validade legal ou para efeito de qualquer tipo de comprovação diagnóstica, servindo apenas como auxiliares à população no intuito de informar e de sugerir uma avaliação médica mais criteriosa.\n");
@@ -90,7 +83,6 @@ void proc_ques_da() {
   printf("----------------------------------------------------------\n");
 }
 // função explicando sobre o procedimento do questionário.
-
 void resultado() {
   printf("----------------------------------------------------------\n");
   printf("Neste teste é considerado resultado indicativo de avaliação médica "
@@ -98,7 +90,6 @@ void resultado() {
   printf("----------------------------------------------------------\n");
 }
 // função resultado para falar sobre o diagnostico positivo sobre o transtorno
-
 int verificarResposta(char *resposta) {
   if (strcmp(resposta, "1") == 0) {
     return 1;
@@ -112,7 +103,6 @@ int verificarResposta(char *resposta) {
   }
 }
 // função recursiva para armazenar a pontuação de acordo com o 1-"sim" respondido pelo usuário.
-
 int main() {
   char resposta[3];
   int opcao = 0;
@@ -122,7 +112,6 @@ int main() {
   printf("----------------------------------------------------------\n");
   printf("<-TESTE DE TDAH->\n");
   printf("----------------------------------------------------------\n");
-  
   while (opcao != 3) {
     printf("1 - Adicionar usuário para fazer o teste TDAH.\n");
     printf("2 - Novo usuário para fazer o teste TDAH.\n");
@@ -130,7 +119,6 @@ int main() {
     printf("Escolha uma opção: ");
     scanf("%d", &opcao);
     printf("----------------------------------------------------------\n");
-
     switch (opcao) {
     case 1:
       printf("Informe seus dados para prosseguir com o teste de TDAH\n");
@@ -155,7 +143,6 @@ int main() {
         printf("Escolha uma opção: ");
         scanf("%d", &opcao_teste);
         printf("----------------------------------------------------------\n");
-
         switch(opcao_teste){
           case 1:
            printf("TESTE [DÉFICIT DE ATENÇÃO]\n");
@@ -165,49 +152,37 @@ int main() {
            printf("----------------------------------------------------------\n");
       // função procedimento do questionário
            proc_ques_da();
-
            respostas_positivas = 0;
-
            printf("1) Tem dificuldade para lembrar de compromissos ou obrigações? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("2) Tem dificuldade para se concentrar no que as pessoas dizem, mesmo quando elas estão falando diretamente com você? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("3) Tem dificuldade para fazer um trabalho que exige organização? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("4) Você se distrai com atividades ou barulho ao seu redor? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("5) Você deixa um projeto pela metade depois de já ter feito as partes mais difíceis? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("6) Você coloca as coisas fora do lugar ou tem dificuldade em encontrar as coisas em casa ou no trabalho? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("7) Você comete erros por falta de atenção quando tem que trabalhar em um projeto chato ou difícil? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("8) Você tem dificuldade para manter a atenção quando está fazendo um trabalho chato ou repetitivo? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("9) Quando você precisa fazer algo que exige muita concentração, você evita? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
            printf("----------------------------------------------------------\n");
-
            resultado();
            printf("RESULTADO:\n");
-            
            FILE *arquivo = fopen("dados.txt", "a");
            if (respostas_positivas >= 4) {
              printf("Pontuação <TESTE DÉFICIT DE ATENÇÃO> = %d.\n", respostas_positivas);
@@ -222,11 +197,8 @@ int main() {
              fprintf(arquivo, "Você não apresenta sintomas suficientes de déficit de atenção.\n");
              fprintf(arquivo, "----------------------\n");
            }
-
           fclose(arquivo);
-
           break;
-
         case 2:
           printf("TESTE [HIPERATIVIDADE]\n");
           printf("----------------------------------------------------------\n");
@@ -236,46 +208,35 @@ int main() {
           printf("----------------------------------------------------------\n");
       // função procedimento do questionário
           proc_ques_da();
-
           respostas_positivas = 0;
-
           printf("1) Você interrompe os outros quando eles estão ocupados? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("2) Você tem dificuldade em esperar nas situações em que cada um tem a sua vez? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("3) Você se sente inquieto(a) ou agitado(a)? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("4) Quando você está conversando, você se pega terminando as frases das pessoas antes delas? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("5) Você se sente ativo(a) demais e necessitando fazer coisas, como se estivesse 'com um motor ligado'? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("6) Você se levanta da cadeira em reuniões ou em outras situações em que deveria ficar sentado(a)? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("7) Você tem dificuldade para sossegar e relaxar quando tem tempo livre para você? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("8) Você fica se mexendo na cadeira ou balançando as mãos ou os pés quando precisa ficar sentado(a) por muito tempo? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("9) Você se pega falando demais em situações sociais? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
           printf("----------------------------------------------------------\n");
-
           resultado();
           printf("RESULTADO:\n");
           FILE *arquiv = fopen("dados.txt", "a");
@@ -292,22 +253,16 @@ int main() {
              fprintf(arquivo, "Você não apresenta sintomas suficientes de hiperatividade.\n");
              fprintf(arquivo, "----------------------\n");
            }
-
           fclose(arquivo);
-
           break;
-
         case 3:
           printf("Teste de TDAH encerrado :).\n");
           break;
-
         default:
           printf("Opção inválida, tente novamente.\n");
-
         }
       }
       break;
-
     case 2:
       printf("Informe os dados do novo usuário para proseguir com o teste de TDAH.\n");
       printf("----------------------------------------------------------\n");
@@ -331,7 +286,6 @@ int main() {
         printf("Escolha uma opção: ");
         scanf("%d", &opcao_teste2);
         printf("----------------------------------------------------------\n");
-
         switch(opcao_teste2){
           case 1:
            printf("TESTE [DÉFICIT DE ATENÇÃO]\n");
@@ -341,46 +295,35 @@ int main() {
            printf("----------------------------------------------------------\n");
       // função procedimento do questionário
            proc_ques_da();
-
            respostas_positivas = 0;
-
            printf("1) Tem dificuldade para lembrar de compromissos ou obrigações? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("2) Tem dificuldade para se concentrar no que as pessoas dizem, mesmo quando elas estão falando diretamente com você? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("3) Tem dificuldade para fazer um trabalho que exige organização? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("4) Você se distrai com atividades ou barulho ao seu redor? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("5) Você deixa um projeto pela metade depois de já ter feito as partes mais difíceis? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("6) Você coloca as coisas fora do lugar ou tem dificuldade em encontrar as coisas em casa ou no trabalho? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("7) Você comete erros por falta de atenção quando tem que trabalhar em um projeto chato ou difícil? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("8) Você tem dificuldade para manter a atenção quando está fazendo um trabalho chato ou repetitivo? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
-
            printf("9) Quando você precisa fazer algo que exige muita concentração, você evita? ");
            scanf("%s", resposta);
            respostas_positivas += verificarResposta(resposta);
            printf("----------------------------------------------------------\n");
-
            resultado();
            printf("RESULTADO:\n");
            FILE *arquivo = fopen("dados.txt", "a");
@@ -397,10 +340,8 @@ int main() {
              fprintf(arquivo, "Você não apresenta sintomas suficientes de déficit de atenção.\n");
              fprintf(arquivo, "----------------------\n");
            }
-
           fclose(arquivo);
           break;
-
         case 2:
           printf("TESTE [HIPERATIVIDADE]\n");
           printf("----------------------------------------------------------\n");
@@ -410,46 +351,35 @@ int main() {
           printf("----------------------------------------------------------\n");
       // função procedimento do questionário
           proc_ques_da();
-
           respostas_positivas = 0;
-
           printf("1) Você interrompe os outros quando eles estão ocupados? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("2) Você tem dificuldade em esperar nas situações em que cada um tem a sua vez? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("3) Você se sente inquieto(a) ou agitado(a)? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("4) Quando você está conversando, você se pega terminando as frases das pessoas antes delas? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("5) Você se sente ativo(a) demais e necessitando fazer coisas, como se estivesse 'com um motor ligado'? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("6) Você se levanta da cadeira em reuniões ou em outras situações em que deveria ficar sentado(a)? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("7) Você tem dificuldade para sossegar e relaxar quando tem tempo livre para você? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("8) Você fica se mexendo na cadeira ou balançando as mãos ou os pés quando precisa ficar sentado(a) por muito tempo? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
-
           printf("9) Você se pega falando demais em situações sociais? ");
           scanf("%s", resposta);
           respostas_positivas += verificarResposta(resposta);
           printf("----------------------------------------------------------\n");
-
           resultado();
           printf("RESULTADO:\n");
           FILE *arquiv = fopen("dados.txt", "a");
@@ -466,31 +396,23 @@ int main() {
              fprintf(arquivo, "Você não apresenta sintomas suficientes de hiperatividade.\n");
              fprintf(arquivo, "----------------------\n");
            }
-
           fclose(arquivo);
-
           break;
-
         case 3:
           printf("Teste de TDAH encerrado :).\n");
           break;
-
         default:
           printf("Opção inválida, tente novamente.\n");
-  
         }
       } 
       break;
-
     case 3:
       printf("Questionário encerrado :).\n");
       break;
-
     default:
       printf("Opção inválida, tente novamente.\n");
     }
   }
-
   free(dados);
   return 0;
 }
